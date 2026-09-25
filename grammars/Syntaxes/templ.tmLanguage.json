@@ -504,7 +504,8 @@
         "1": {
           "name": "punctuation.definition.comment.go"
         }
-      }
+      },
+      "contentName": "comment.block.go"
     },
     "go-comment-double-slash": {
       "name": "comment.line.double-slash.go",
@@ -514,7 +515,8 @@
           "name": "punctuation.definition.comment.go"
         }
       },
-      "end": "(?:\\n|$)"
+      "end": "(?:\\n|$)",
+      "contentName": "comment.line.double-slash.go"
     },
     "html-comment": {
       "begin": "<!--",
@@ -529,7 +531,8 @@
           "name": "punctuation.definition.comment.html"
         }
       },
-      "name": "comment.block.html"
+      "name": "comment.block.html",
+      "contentName": "comment.block.html"
     },
     "sgml": {
       "begin": "<!",
@@ -675,7 +678,8 @@
         {
           "include": "#entities"
         }
-      ]
+      ],
+      "contentName": "string.quoted.double.html"
     },
     "tag-generic-attribute": {
       "match": "(?<=[^=])\\b([a-zA-Z0-9:-]+)",

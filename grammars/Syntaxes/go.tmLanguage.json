@@ -232,7 +232,8 @@
               "name": "punctuation.definition.comment.go"
             }
           },
-          "name": "comment.block.go"
+          "name": "comment.block.go",
+          "contentName": "comment.block.go"
         },
         {
           "begin": "\\/\\/",
@@ -244,7 +245,8 @@
           },
           "endCaptures": {
           },
-          "name": "comment.line.double-slash.go"
+          "name": "comment.line.double-slash.go",
+          "contentName": "comment.line.double-slash.go"
         }
       ]
     },
@@ -379,7 +381,8 @@
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "contentName": "string.quoted.double.go"
     },
     "keywords": {
       "patterns": [
@@ -1012,7 +1015,8 @@
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "contentName": "string.quoted.raw.go"
     },
     "runes": {
       "patterns": [
@@ -1039,7 +1043,8 @@
               "match": "[^']+",
               "name": "invalid.illegal.unknown-rune.go"
             }
-          ]
+          ],
+          "contentName": "string.quoted.rune.go"
         }
       ]
     },
