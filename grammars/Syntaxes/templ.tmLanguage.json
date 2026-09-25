@@ -547,13 +547,17 @@
         {
           "begin": "(?i:DOCTYPE)",
           "captures": {
-            "1": {
-              "name": "entity.name.tag.doctype.html"
+            "0": {
+              "name": "punctuation.definition.tag.doctype.html"
             }
           },
           "end": "(?=>)",
           "name": "meta.tag.sgml.doctype.html",
           "patterns": [
+            {
+              "match": "\\b[a-zA-Z][a-zA-Z0-9-]*\\b",
+              "name": "entity.other.attribute-name.doctype.html"
+            },
             {
               "match": "\"[^\">]*\"",
               "name": "string.quoted.double.doctype.identifiers-and-DTDs.html"
