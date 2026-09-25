@@ -91,6 +91,9 @@
     },
     {
       "include": "#storage_types"
+    },
+    {
+      "include": "#identifiers"
     }
   ],
   "repository": {
@@ -157,7 +160,7 @@
             },
             {
               "match": "\\w+",
-              "name": "variable.other.assignment.go"
+              "name": "variable.other.property.assignment.go"
             },
             {
               "include": "#delimiters"
@@ -426,7 +429,7 @@
       "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)((?:[a-zA-Z_][a-zA-Z0-9_]*(?:(?:\\s)+)?\\.(?:(?:\\s)+)?)*)(?:(?:\\s)+)?(\\b[a-zA-Z_][a-zA-Z0-9_]*\\b(?!\\())",
       "captures": {
         "1": {
-          "name": "variable.other.object.access.go"
+          "name": "variable.other.property.object.access.go"
         },
         "2": {
           "name": "punctuation.separator.dot-access.go"
@@ -451,7 +454,7 @@
               "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.go"
+                  "name": "variable.other.property.object.access.go"
                 },
                 "2": {
                   "name": "punctuation.separator.dot-access.go"
@@ -476,7 +479,7 @@
       "end": "\\)",
       "beginCaptures": {
         "1": {
-          "name": "variable.other.object.access.go"
+          "name": "variable.other.property.object.access.go"
         },
         "2": {
           "name": "punctuation.separator.dot-access.go"
@@ -501,7 +504,7 @@
               "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.go"
+                  "name": "variable.other.property.object.access.go"
                 },
                 "2": {
                   "name": "punctuation.separator.dot-access.go"
@@ -1150,7 +1153,7 @@
                 },
                 {
                   "match": "\\w+",
-                  "name": "variable.other.assignment.go"
+                  "name": "variable.other.property.assignment.go"
                 },
                 {
                   "include": "#delimiters"
@@ -1177,7 +1180,7 @@
                 },
                 {
                   "match": "\\w+",
-                  "name": "variable.other.declaration.go"
+                  "name": "variable.other.property.declaration.go"
                 },
                 {
                   "include": "#delimiters"
@@ -1225,6 +1228,11 @@
           "name": "entity.name.function.go"
         }
       }
+    },
+    "identifiers": {
+      "comment": "Catch-all for Go identifiers no other rule scoped. Scoped variable.other.property.* because that is the only variable scope TemplHighlighter colours.",
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "name": "variable.other.property.identifier.go"
     }
   }
 }
