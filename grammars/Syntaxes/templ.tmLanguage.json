@@ -504,7 +504,8 @@
         "1": {
           "name": "punctuation.definition.comment.go"
         }
-      }
+      },
+      "contentName": "comment.block.go"
     },
     "go-comment-double-slash": {
       "name": "comment.line.double-slash.go",
@@ -514,7 +515,8 @@
           "name": "punctuation.definition.comment.go"
         }
       },
-      "end": "(?:\\n|$)"
+      "end": "(?:\\n|$)",
+      "contentName": "comment.line.double-slash.go"
     },
     "html-comment": {
       "begin": "<!--",
@@ -529,7 +531,8 @@
           "name": "punctuation.definition.comment.html"
         }
       },
-      "name": "comment.block.html"
+      "name": "comment.block.html",
+      "contentName": "comment.block.html"
     },
     "sgml": {
       "begin": "<!",
@@ -544,13 +547,17 @@
         {
           "begin": "(?i:DOCTYPE)",
           "captures": {
-            "1": {
-              "name": "entity.name.tag.doctype.html"
+            "0": {
+              "name": "punctuation.definition.tag.doctype.html"
             }
           },
           "end": "(?=>)",
           "name": "meta.tag.sgml.doctype.html",
           "patterns": [
+            {
+              "match": "\\b[a-zA-Z][a-zA-Z0-9-]*\\b",
+              "name": "entity.other.attribute-name.doctype.html"
+            },
             {
               "match": "\"[^\">]*\"",
               "name": "string.quoted.double.doctype.identifiers-and-DTDs.html"
@@ -675,7 +682,8 @@
         {
           "include": "#entities"
         }
-      ]
+      ],
+      "contentName": "string.quoted.double.html"
     },
     "tag-generic-attribute": {
       "match": "(?<=[^=])\\b([a-zA-Z0-9:-]+)",
@@ -701,7 +709,7 @@
               "name": "punctuation.definition.string.begin.html"
             }
           },
-          "contentName": "meta.toc-list.id.html",
+          "contentName": "string.quoted.double.html",
           "end": "\"",
           "endCaptures": {
             "0": {
@@ -722,7 +730,7 @@
               "name": "punctuation.definition.string.begin.html"
             }
           },
-          "contentName": "meta.toc-list.id.html",
+          "contentName": "string.quoted.single.html",
           "end": "'",
           "endCaptures": {
             "0": {
@@ -739,7 +747,7 @@
         {
           "captures": {
             "0": {
-              "name": "meta.toc-list.id.html"
+              "name": "string.unquoted.html"
             }
           },
           "match": "(?<==)(?:[^\\s{}<>/'\"]|/(?!>))+",

@@ -12,6 +12,31 @@ Support for the [Templ Programming Language](https://templ.guide/)
 - [gopls](https://pkg.go.dev/golang.org/x/tools/gopls)
 - [templ](https://templ.guide/quick-start/installation/)
 
+## Building and installing in GoLand
+
+You need JDK 21 or newer. GoLand ships one (the JetBrains Runtime), so you don't need to install Java separately:
+
+```
+export JAVA_HOME=/Applications/GoLand.app/Contents/jbr/Contents/Home   # macOS
+```
+
+On Linux the runtime is in `<GoLand install dir>/jbr`. On Windows it is in `<GoLand install dir>\jbr`.
+
+1. If you changed anything under `./grammars`, rebundle it first (see [bundle-vscode](#bundle-vscode)). The plugin loads the grammars from `src/main/resources/tm-bundle.zip`, not from `./grammars`.
+2. Build the plugin:
+
+   ```
+   ./gradlew buildPlugin
+   ```
+
+   This writes `build/distributions/templ-jetbrains-<version>.zip`.
+3. In GoLand, open **Settings → Plugins**, click the gear icon, choose **Install Plugin from Disk…** and select the zip. Don't unzip it first.
+4. Restart GoLand when prompted.
+
+The local build has the same plugin ID as the Marketplace release, so it replaces the release. If the Marketplace has a newer version, GoLand will offer to update, and updating overwrites your local build. The build targets GoLand 2026.2 and later (`pluginSinceBuild` in `gradle.properties`).
+
+To try your changes without touching your main GoLand install, run `./gradlew runIde`. This opens a sandboxed GoLand with the plugin loaded.
+
 ## Tasks
 
 ### bundle-vscode
@@ -22,6 +47,15 @@ Directory: ./grammars
 zip -rqq ../tm-bundle.zip *
 mv ../tm-bundle.zip ../src/main/resources/
 ```
+
+### Fix syntax highlighting
+
+Highlighting comes from the TextMate grammars in `./grammars/Syntaxes`. The platform's TextMate lexer tokenises the file, and `TemplHighlighter` maps the innermost scope name of each token to an IDE colour. Two things to know when you edit the grammars:
+
+- Every `begin`/`end` rule needs a `contentName`. Without one, the text between the delimiters gets a scope with no name and shows up uncoloured.
+- `TemplHighlighter` only colours a fixed set of scopes. For example, the only `variable.*` scopes it colours are `variable.other.property` and `variable.other.object.property`. A scope it doesn't map is shown in the default text colour.
+
+After editing, rebundle ([bundle-vscode](#bundle-vscode)), rebuild and reinstall.
 
 ### Fix PSI parsing and lexing issues
 

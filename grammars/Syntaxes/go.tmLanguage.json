@@ -39,6 +39,9 @@
       "include": "#function_declarations"
     },
     {
+      "include": "#parameter_types"
+    },
+    {
       "include": "#method_access"
     },
     {
@@ -91,6 +94,9 @@
     },
     {
       "include": "#storage_types"
+    },
+    {
+      "include": "#identifiers"
     }
   ],
   "repository": {
@@ -157,7 +163,7 @@
             },
             {
               "match": "\\w+",
-              "name": "variable.other.assignment.go"
+              "name": "variable.other.property.assignment.go"
             },
             {
               "include": "#delimiters"
@@ -232,7 +238,8 @@
               "name": "punctuation.definition.comment.go"
             }
           },
-          "name": "comment.block.go"
+          "name": "comment.block.go",
+          "contentName": "comment.block.go"
         },
         {
           "begin": "\\/\\/",
@@ -244,7 +251,8 @@
           },
           "endCaptures": {
           },
-          "name": "comment.line.double-slash.go"
+          "name": "comment.line.double-slash.go",
+          "contentName": "comment.line.double-slash.go"
         }
       ]
     },
@@ -379,7 +387,8 @@
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "contentName": "string.quoted.double.go"
     },
     "keywords": {
       "patterns": [
@@ -423,7 +432,7 @@
       "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)((?:[a-zA-Z_][a-zA-Z0-9_]*(?:(?:\\s)+)?\\.(?:(?:\\s)+)?)*)(?:(?:\\s)+)?(\\b[a-zA-Z_][a-zA-Z0-9_]*\\b(?!\\())",
       "captures": {
         "1": {
-          "name": "variable.other.object.access.go"
+          "name": "variable.other.property.object.access.go"
         },
         "2": {
           "name": "punctuation.separator.dot-access.go"
@@ -448,7 +457,7 @@
               "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.go"
+                  "name": "variable.other.property.object.access.go"
                 },
                 "2": {
                   "name": "punctuation.separator.dot-access.go"
@@ -473,7 +482,7 @@
       "end": "\\)",
       "beginCaptures": {
         "1": {
-          "name": "variable.other.object.access.go"
+          "name": "variable.other.property.object.access.go"
         },
         "2": {
           "name": "punctuation.separator.dot-access.go"
@@ -498,7 +507,7 @@
               "match": "((?:[a-zA-Z_][a-zA-Z0-9_]*|(?<=\\]|\\)))(?:(?:\\s)+)?)(\\.)",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.go"
+                  "name": "variable.other.property.object.access.go"
                 },
                 "2": {
                   "name": "punctuation.separator.dot-access.go"
@@ -1012,7 +1021,8 @@
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "contentName": "string.quoted.raw.go"
     },
     "runes": {
       "patterns": [
@@ -1039,7 +1049,8 @@
               "match": "[^']+",
               "name": "invalid.illegal.unknown-rune.go"
             }
-          ]
+          ],
+          "contentName": "string.quoted.rune.go"
         }
       ]
     },
@@ -1145,7 +1156,7 @@
                 },
                 {
                   "match": "\\w+",
-                  "name": "variable.other.assignment.go"
+                  "name": "variable.other.property.assignment.go"
                 },
                 {
                   "include": "#delimiters"
@@ -1172,7 +1183,7 @@
                 },
                 {
                   "match": "\\w+",
-                  "name": "variable.other.declaration.go"
+                  "name": "variable.other.property.declaration.go"
                 },
                 {
                   "include": "#delimiters"
@@ -1211,6 +1222,48 @@
           ]
         }
       ]
+    },
+    "functions": {
+      "comment": "Function calls. The grammar includes #functions but never defined it.",
+      "match": "\\b(?!(?:if|for|switch|select|func|return|go|defer|range|case|chan|map|struct|interface|else|var|const|type|import|package)\\b)([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*(?:\\[[^\\]]*\\])?\\()",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.go"
+        }
+      }
+    },
+    "identifiers": {
+      "comment": "Catch-all for Go identifiers no other rule scoped. Scoped variable.other.property.* because that is the only variable scope TemplHighlighter colours.",
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "name": "variable.other.property.identifier.go"
+    },
+    "parameter_types": {
+      "comment": "`name pkg.Type` / `name Type` in parameter lists, so packages and types get the package/type colours instead of the identifier colour. Two bare identifiers before `,` or `)` only occur in declarations.",
+      "match": "\\b(?!(?:break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|interface|map|package|range|return|select|struct|switch|type|var)\\b)([a-zA-Z_][a-zA-Z0-9_]*)(\\s+)((?:\\.\\.\\.|\\*|\\[\\d*\\])*)(?:([a-zA-Z_][a-zA-Z0-9_]*)(\\.))?(?!(?:break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|interface|map|package|range|return|select|struct|switch|type|var|bool|byte|complex64|complex128|error|float32|float64|int|int8|int16|int32|int64|rune|string|uint|uint8|uint16|uint32|uint64|uintptr|any)\\b)([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*[,)])",
+      "captures": {
+        "1": {
+          "name": "variable.other.property.parameter.go"
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#brackets"
+            },
+            {
+              "include": "#operators"
+            }
+          ]
+        },
+        "4": {
+          "name": "entity.name.package.go"
+        },
+        "5": {
+          "name": "punctuation.separator.dot-access.go"
+        },
+        "6": {
+          "name": "entity.name.type.go"
+        }
+      }
     }
   }
 }
