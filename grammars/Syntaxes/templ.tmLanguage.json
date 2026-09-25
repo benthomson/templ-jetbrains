@@ -705,7 +705,7 @@
               "name": "punctuation.definition.string.begin.html"
             }
           },
-          "contentName": "meta.toc-list.id.html",
+          "contentName": "string.quoted.double.html",
           "end": "\"",
           "endCaptures": {
             "0": {
@@ -726,7 +726,7 @@
               "name": "punctuation.definition.string.begin.html"
             }
           },
-          "contentName": "meta.toc-list.id.html",
+          "contentName": "string.quoted.single.html",
           "end": "'",
           "endCaptures": {
             "0": {
@@ -743,7 +743,7 @@
         {
           "captures": {
             "0": {
-              "name": "meta.toc-list.id.html"
+              "name": "string.unquoted.html"
             }
           },
           "match": "(?<==)(?:[^\\s{}<>/'\"]|/(?!>))+",
