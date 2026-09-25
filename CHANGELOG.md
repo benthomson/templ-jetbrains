@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Restore the Go and HTML colour mappings that shipped in 0.0.21 but were missing from the source
+- Colour the text inside Go strings, runes, comments and HTML attribute values, not just the delimiters
+- Colour plain function and component calls such as `@logo()`
+- Colour `id="..."` attribute values as strings
+- Colour Go identifiers inside templates, so only raw HTML text uses the default colour
+- Colour package and type names in component and function parameter lists
+- Fix `<!DOCTYPE html>` highlighting
+
 ## [0.0.21] - 2026-07-24
 
 ### Fixed
