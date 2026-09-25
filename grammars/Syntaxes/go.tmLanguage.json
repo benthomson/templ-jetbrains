@@ -1216,6 +1216,15 @@
           ]
         }
       ]
+    },
+    "functions": {
+      "comment": "Function calls. The grammar includes #functions but never defined it.",
+      "match": "\\b(?!(?:if|for|switch|select|func|return|go|defer|range|case|chan|map|struct|interface|else|var|const|type|import|package)\\b)([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*(?:\\[[^\\]]*\\])?\\()",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.go"
+        }
+      }
     }
   }
 }
